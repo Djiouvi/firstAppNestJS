@@ -1,12 +1,11 @@
-import { Module } from '@nestjs/common';
-import { ControllerModule } from './Test/controller.module';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import database from '../config/database';
-import { UserModule } from './user/user/user.module';
+import { UserModule } from './user/user.module';
+import { LoggerMiddleware } from '../config/loggerMiddleware';
 
 @Module({
   imports: [
-    ControllerModule,
     UserModule,
 
     ConfigModule.forRoot({
@@ -17,5 +16,10 @@ import { UserModule } from './user/user/user.module';
     })
   ]
 })
-export class AppModule {
+export class AppModule implements NestModule{
+  configure(consumer: MiddlewareConsumer): any {
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({path: '*', method: RequestMethod.ALL})
+  }
 }
