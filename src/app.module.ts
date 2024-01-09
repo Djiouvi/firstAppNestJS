@@ -3,8 +3,16 @@ import { ConfigModule } from '@nestjs/config';
 import database from '../config/database';
 import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from '../config/loggerMiddleware';
+import { HttpExceptionFilter } from '../config/httpExceptionFilter';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
+  providers: [
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
   imports: [
     UserModule,
 
