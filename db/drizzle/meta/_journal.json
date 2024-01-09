@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1704380373262,
+      "tag": "0000_volatile_songbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1704380717032,
+      "tag": "0001_rainy_kylun",
+      "breakpoints": true
+    }
+  ]
+}
