@@ -1,0 +1,12 @@
+version: '3'
+services:
+  artemis-postgresql:
+    container_name: nestjs-postgresql
+    image: postgres:9.6
+    volumes:
+      - ./postgres-initdb/:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    ports:
+      - "6432:5432"
