@@ -11,8 +11,8 @@ export const users = pgTable('users', {
   firstname: varchar('firstname', { length: 256 }),
   lastname: varchar('lastname', { length: 256 }),
   age: integer('age'),
-  createdAt: timestamp("created_at"),
-  updatedAt: timestamp("updated_at"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(), //todo en attente https://github.com/drizzle-team/drizzle-orm/pull/1509
 });
 
 export type User = typeof users.$inferSelect;
@@ -45,7 +45,14 @@ export async function findAllUser(): Promise<User[]> {
 }
 
 export async function updateUser(user: User): Promise<User> {
-  return db.update(users).set(user).then(user => Promise.resolve(user[0]));
+  if(user.id == 0) {
+    throw new NotFoundException(`ID is mandatory`);
+  }
+
+  return db
+    .update(users)
+    .set(user)
+    .then(user => Promise.resolve(user[0]));
 }
 
 
