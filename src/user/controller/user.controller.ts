@@ -1,6 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { User } from '../../../db/schema/users';
+import { ZodValidationPipe } from '../../../config/zodValidationPipe';
+import { User } from '../repository/users.repository';
+import { requiredUserValidation } from '../../../db/schema/usersEntity';
 
 @Controller('users')
 export class UserController {
@@ -9,7 +11,7 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<User> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.service.findOneUser(id);
   }
 
@@ -19,17 +21,19 @@ export class UserController {
   }
 
   @Post()
+  @UsePipes(new ZodValidationPipe(requiredUserValidation))
   create(@Body() user: User): Promise<User> {
     return this.service.createUser(user);
   }
 
   @Delete()
-  delete(@Param('id') id: string): Promise<void> {
-    return this.service.deleteOneUser(+id);
+  delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.service.deleteOneUser(id);
   }
 
   @Put(':id')
-  put(@Param('id') id: number, @Body() user: User): Promise<User> {
+  @UsePipes(new ZodValidationPipe(requiredUserValidation))
+  put(@Param('id', ParseIntPipe) id: number, @Body() user: User): Promise<User> {
     return this.service.updateUser({ ...user, id: id });
   }
 }

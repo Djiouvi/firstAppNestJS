@@ -1,11 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { deleteOneUser, findAllUser, findOneUser, insertUser, updateUser, User } from '../../../db/schema/users';
+import { deleteOneUser, findAllUser, findOneUser, insertUser, updateUser, User } from '../repository/users.repository';
 
 @Injectable()
 export class UserService {
-
-  constructor() {
-  }
 
   async createUser(user: User): Promise<User> {
     return insertUser(user);
@@ -20,7 +17,7 @@ export class UserService {
   }
 
   async updateUser(user: User): Promise<User> {
-    return updateUser(user)
+    return updateUser(user);
   }
 
   async findAllUser(): Promise<User[]> {
