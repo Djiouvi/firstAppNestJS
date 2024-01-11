@@ -1,11 +1,11 @@
 {
-  "id": "7922d797-4702-43c3-89b7-e6e593708572",
-  "prevId": "b074b05a-db1f-4bb8-b8e6-a1190fa7496a",
+  "id": "33480ba2-ccc5-40bd-8d04-751c05503946",
+  "prevId": "7922d797-4702-43c3-89b7-e6e593708572",
   "version": "5",
   "dialect": "pg",
   "tables": {
-    "test": {
-      "name": "test",
+    "testEntity": {
+      "name": "testEntity",
       "schema": "",
       "columns": {
         "id": {

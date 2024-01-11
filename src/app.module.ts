@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import database from '../config/database';
 import { UserModule } from './user/user.module';
 import { LoggerMiddleware } from '../config/loggerMiddleware';
 import { HttpExceptionFilter } from '../config/httpExceptionFilter';
 import { APP_FILTER } from '@nestjs/core';
+import { DatabaseServiceModule } from '../config/databaseService.module';
 
 @Module({
   providers: [
@@ -16,11 +16,10 @@ import { APP_FILTER } from '@nestjs/core';
   imports: [
     UserModule,
 
+    DatabaseServiceModule,
+
     ConfigModule.forRoot({
       cache: true,
-      load: [
-        database
-      ]
     })
   ]
 })
