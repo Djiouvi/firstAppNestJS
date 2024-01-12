@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { usersEntity } from '../../../db/schema/usersEntity';
-import { DatabaseService } from '../../../config/databaseService';
 import 'dotenv/config';
 import { eq } from 'drizzle-orm';
+import { DatabaseService } from '../../../config/databaseService';
 
 export type User = typeof usersEntity.$inferSelect;
 export type NewUser = typeof usersEntity.$inferInsert;

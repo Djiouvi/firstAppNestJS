@@ -7,6 +7,8 @@ export const usersEntity = pgTable('users', {
   firstname: varchar('firstname', { length: 256 }),
   lastname: varchar('lastname', { length: 256 }),
   age: integer('age'),
+  username: varchar('username'),
+  // password:
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow() //todo en attente https://github.com/drizzle-team/drizzle-orm/pull/1509
 });

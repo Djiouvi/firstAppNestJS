@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from '@nestjs/common';
 import { UserService } from '../service/user.service';
-import { ZodValidationPipe } from '../../../config/zodValidationPipe';
 import { User } from '../repository/user.repository';
 import { requiredUserValidation } from '../../../db/schema/usersEntity';
+import { ZodValidationPipe } from '../../../config/zodValidationPipe';
 
 @Controller('users')
 export class UserController {
