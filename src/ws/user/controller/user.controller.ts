@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { User } from '../repository/user.repository';
 import { requiredUserValidation } from '../../../db/schema/usersEntity';
 import { ZodValidationPipe } from '../../../config/zodValidationPipe';
+import { AuthGuard } from '../../auth/guard/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('users')
 export class UserController {
 
